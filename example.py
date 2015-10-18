@@ -28,18 +28,19 @@ def fader(pds1, cnt):
 
 if __name__ == '__main__':
     # Our ethernet attached power supply.
-    pds = PowerSupply("192.168.1.120")
-
+    pds = PowerSupply("192.168.1.244")
+    numLights = 50
+    fix = [None]*numLights
     # Our light fixtures
-    fix1 = FixtureRGB(0)
-    fix2 = FixtureRGB(3)
-    fix3 = FixtureRGB(6)
+    for i in range(0,numLights):
+       print(i)
+       fix[i] = FixtureRGB(0+3*i)
 
     # Attach our fixtures to the power supply
-    pds.append(fix1)
-    pds.append(fix2)
-    pds.append(fix3)
+    for i in range(0,numLights):
+       print(i)
+       pds.append(fix[i])
 
     while 1:
-        fader(pds, 10)
+        #fader(pds, 10)
         rainbow_cycle(pds)
