@@ -1,7 +1,8 @@
 from kinet import *
 
-def rainbow_cycle(pds, pause=.1, steps=1000):
-    div = steps / len(pds)
+def rainbow_cycle(pds, pause=.1, steps=1500, div = None):
+    if div is None:
+        div = steps / len(pds)
     for step in range(steps):
         ratio = 0
         for idx, fixture in enumerate(pds):

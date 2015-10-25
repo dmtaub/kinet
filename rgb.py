@@ -4,7 +4,7 @@ from sys import argv, exit
 import time
 
 if len(argv) <3:
-    print("Uwage: ./rgb.py <red> <green> <blue>\n")
+    print("Usage: ./rgb.py <red> <green> <blue>\nr/g/b values from 0-255\n")
     exit()
 
 print argv[0]
@@ -29,18 +29,20 @@ r= int(argv[1])
 g= int(argv[2])
 b= int(argv[3])
 
-def scale(a,b):
-  return(a*b/steps)
+start = [0,0,0]
+destination = [r,g,b]
+
+def _scale(orig_new):
+ step = orig_new[2]
+ return ((orig_new[1]-orig_new[0])*step/steps)
+def scale(orig_col,new_col,step):
+  return map(_scale, zip(orig_col,new_col,[step,step,step]))
+  #return(col*b/stepsI#)
 
 for step in range(steps):
   ratio += 1
   for fixture in fix:
-    #ratio += (step) % steps / float(steps)
-    #fixture.hsv = (ratio, 1.0, 1.0)
-    #print ratio, r,g,b
-    #import pdb; pdb.set_trace()
-    #print ratio, r,g,b, rgb
-    fixture.rgb = (scale(r,ratio),scale(g,ratio),scale(b,ratio))
+    fixture.rgb = scale(start,destination,ratio)
     #print rgb
     #print pds
   pds.go()
